@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caio Breder Bernardo-de-Lima — Data Analytics Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg2: #f7f7f5;
+    --bg3: #efefec;
+    --border: #e4e4e0;
+    --accent: #1a6b3c;
+    --accent-light: #e8f5ee;
+    --accent2: #2d5be3;
+    --text: #111110;
+    --muted: #6b6b65;
+    --card-bg: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 48px 80px;
+    max-width: 860px;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    width: fit-content;
+    opacity: 0;
+    animation: fadeUp 0.5s 0.1s forwards;
+  }
+  .hero h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    color: var(--text);
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 40px;
+    line-height: 1.65;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.3s forwards;
+  }
+  .hero-pills {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 44px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.4s forwards;
+  }
+  .pill {
+    padding: 7px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .pill.green { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+  .hero-cta {
+    display: flex; gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.5s forwards;
+  }
+  .btn {
+    padding: 13px 26px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.18s;
+    display: inline-block;
+  }
+  .btn-primary { background: var(--text); color: #fff; border: none; }
+  .btn-primary:hover { background: #333; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--border); }
+  .btn-outline:hover { border-color: #999; transform: translateY(-1px); }
+
+  /* LAYOUT */
+  .container { max-width: 920px; margin: 0 auto; padding: 0 48px; }
+  section { padding: 96px 0; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 48px;
+    color: var(--text);
+  }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: var(--border); }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 16px;
+  }
+  .skill-card {
+    padding: 28px 24px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .skill-card:hover { background: var(--bg3); border-color: #ccc; }
+  .skill-icon {
+    width: 40px; height: 40px;
+    background: var(--accent-light);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+  .skill-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+  .skill-card p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* PROJECTS */
+  .projects-list { display: flex; flex-direction: column; gap: 20px; }
+  .project-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 36px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .project-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 24px rgba(26,107,60,0.08);
+  }
+  .project-top {
+    display: flex; justify-content: space-between;
+    align-items: flex-start; gap: 16px;
+    margin-bottom: 6px;
+  }
+  .project-num {
+    font-size: 12px; font-weight: 600;
+    color: var(--muted); letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .project-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--text); line-height: 1.25;
+  }
+  .badge {
+    padding: 4px 12px; border-radius: 100px;
+    font-size: 11px; font-weight: 600;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .badge-done { background: var(--accent-light); color: var(--accent); }
+  .project-desc {
+    font-size: 14px; color: var(--muted);
+    margin: 14px 0 22px; line-height: 1.65;
+  }
+  .project-meta {
+    display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px;
+  }
+  .meta-item { font-size: 13px; color: var(--muted); }
+  .meta-item strong {
+    display: block; font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text); margin-bottom: 2px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .tag {
+    padding: 4px 12px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 12px; font-weight: 500; color: var(--muted);
+  }
+  .analyses {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 10px;
+  }
+  .analysis-item {
+    font-size: 13px; color: var(--muted);
+    padding-left: 14px; position: relative;
+  }
+  .analysis-item::before {
+    content: '';
+    position: absolute; left: 0; top: 9px;
+    width: 5px; height: 1.5px;
+    background: var(--accent);
+  }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start; }
+  .about-text p { font-size: 15px; color: var(--muted); margin-bottom: 18px; line-height: 1.75; }
+  .about-text p strong { color: var(--text); font-weight: 600; }
+  .stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .stat-card {
+    padding: 24px 20px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+  }
+  .stat-number {
+    font-family: 'Sora', sans-serif;
+    font-size: 36px; font-weight: 700;
+    color: var(--accent); line-height: 1; margin-bottom: 4px;
+  }
+  .stat-label { font-size: 13px; color: var(--muted); }
+
+  /* CONTACT */
+  .contact-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 64px 48px;
+    text-align: center;
+  }
+  .contact-box h3 {
+    font-family: 'Sora', sans-serif;
+    font-size: 36px; font-weight: 700;
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .contact-box p { color: var(--muted); margin-bottom: 32px; font-size: 16px; }
+  .contact-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+  /* FOOTER */
+  .footer-inner {
+    max-width: 920px; margin: 0 auto; padding: 28px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p { font-size: 13px; color: var(--muted); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.55s, transform 0.55s; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 680px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero, .container { padding-left: 20px; padding-right: 20px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-box { padding: 40px 20px; }
+    .footer-inner { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Caio Breder</a>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero container">
+  <div class="hero-tag">Data Analytics Portfolio</div>
+  <h1>Turning data into<br><span>business decisions.</span></h1>
+  <p class="hero-sub">
+    Digital Media Technology student passionate about finding patterns in data and communicating insights in a clear, visual way.
+  </p>
+  <div class="hero-pills">
+    <span class="pill green">SQL</span>
+    <span class="pill green">Power BI</span>
+    <span class="pill">Excel</span>
+    <span class="pill">Data Visualization</span>
+    <span class="pill">Business Intelligence</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View projects</a>
+    <a href="https://www.linkedin.com/in/caio-bernardo-de-lima-6a4010240/?skipRedirect=true" class="btn btn-outline" target="_blank">LinkedIn</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section>
+  <div class="container">
+    <p class="section-label fade-in">Tools</p>
+    <h2 class="section-title fade-in">Technical stack</h2>
+    <div class="skills-grid fade-in">
+      <div class="skill-card">
+        <div class="skill-icon">⚡</div>
+        <h4>SQL</h4>
+        <p>Queries, aggregations, joins, subqueries and exploratory analysis on relational data.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <h4>Power BI</h4>
+        <p>Interactive dashboards, KPIs, basic DAX and visual storytelling with data.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📋</div>
+        <h4>Excel</h4>
+        <p>Pivot tables, advanced formulas, charts and data cleaning.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔍</div>
+        <h4>Data Analysis</h4>
+        <p>Metric definition, trend interpretation and generation of business insights.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label fade-in">Portfolio</p>
+    <h2 class="section-title fade-in">Analytics projects</h2>
+    <div class="projects-list">
+
+      <a class="project-card fade-in" href="https://github.com/CaioBreder/olist-sales-analysis" target="_blank">
+        <div class="project-num">01 / 03</div>
+        <div class="project-top">
+          <h3 class="project-title">Sales Analysis — Olist E-commerce</h3>
+          <span class="badge badge-done">Completed</span>
+        </div>
+        <p class="project-desc">Full exploratory analysis of a Brazilian marketplace with ~100,000 real orders. Identified revenue trends, most profitable categories and mapped regional customer profiles.</p>
+        <div class="project-meta">
+          <div class="meta-item"><strong>Dataset</strong>Olist (Kaggle)</div>
+          <div class="meta-item"><strong>Volume</strong>~100k orders</div>
+          <div class="meta-item"><strong>Period</strong>2016 – 2018</div>
+        </div>
+        <div class="tags">
+          <span class="tag">SQL</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">E-commerce</span>
+          <span class="tag">EDA</span>
+        </div>
+        <div class="analyses">
+          <span class="analysis-item">Monthly revenue trend</span>
+          <span class="analysis-item">Top 10 categories by revenue</span>
+          <span class="analysis-item">Avg order value by state</span>
+          <span class="analysis-item">Customer satisfaction scores</span>
+          <span class="analysis-item">Regional delivery time</span>
+          <span class="analysis-item">Payment method preferences</span>
+        </div>
+      </a>
+
+      <a class="project-card fade-in" href="https://github.com/CaioBreder/hr-analytics" target="_blank">
+        <div class="project-num">02 / 03</div>
+        <div class="project-top">
+          <h3 class="project-title">HR Analytics — IBM Dataset</h3>
+          <span class="badge badge-done">Completed</span>
+        </div>
+        <p class="project-desc">Analysis of employee profiles and factors associated with turnover at a tech company. Identified patterns to help HR make more strategic decisions about talent retention.</p>
+        <div class="project-meta">
+          <div class="meta-item"><strong>Dataset</strong>IBM HR Analytics (Kaggle)</div>
+          <div class="meta-item"><strong>Volume</strong>1,470 employees</div>
+          <div class="meta-item"><strong>Focus</strong>People Analytics</div>
+        </div>
+        <div class="tags">
+          <span class="tag">SQL</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">HR</span>
+          <span class="tag">Turnover</span>
+        </div>
+        <div class="analyses">
+          <span class="analysis-item">Overall attrition rate</span>
+          <span class="analysis-item">Turnover by department</span>
+          <span class="analysis-item">Salary vs satisfaction</span>
+          <span class="analysis-item">Age & tenure patterns</span>
+          <span class="analysis-item">Work-life balance score</span>
+          <span class="analysis-item">Retention risk profile</span>
+        </div>
+      </a>
+
+      <a class="project-card fade-in" href="https://github.com/CaioBreder/churn-analysis" target="_blank">
+        <div class="project-num">03 / 03</div>
+        <div class="project-top">
+          <h3 class="project-title">Churn Analysis — Telecom Dataset</h3>
+          <span class="badge badge-done">Completed</span>
+        </div>
+        <p class="project-desc">Study of the profile of customers who cancel a telecom service. Built a data-driven story identifying risk factors and concrete business recommendations for reducing churn.</p>
+        <div class="project-meta">
+          <div class="meta-item"><strong>Dataset</strong>Telecom Churn (Kaggle)</div>
+          <div class="meta-item"><strong>Volume</strong>~7,000 customers</div>
+          <div class="meta-item"><strong>Focus</strong>Customer Retention</div>
+        </div>
+        <div class="tags">
+          <span class="tag">SQL</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">Churn</span>
+          <span class="tag">Storytelling</span>
+        </div>
+        <div class="analyses">
+          <span class="analysis-item">Overall churn rate</span>
+          <span class="analysis-item">Churn by contract type</span>
+          <span class="analysis-item">Churn by tenure</span>
+          <span class="analysis-item">Revenue at risk</span>
+          <span class="analysis-item">High-risk customer profile</span>
+          <span class="analysis-item">Business recommendations</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label fade-in">About me</p>
+    <h2 class="section-title fade-in">Who I am</h2>
+    <div class="about-grid fade-in">
+      <div class="about-text">
+        <p>I'm <strong>Caio Breder Bernardo-de-Lima</strong>, a Digital Media Technology student with a passion for turning data into decisions. I'm building my portfolio with projects based on real-world datasets.</p>
+        <p>I have hands-on experience with <strong>SQL for data extraction and analysis</strong> and <strong>Power BI for visualization</strong>. I'm always learning and applying what I study in practical projects.</p>
+        <p>I'm looking for a <strong>Junior Data Analyst</strong> opportunity where I can contribute with analyses that generate real business value.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Portfolio projects</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2</div>
+          <div class="stat-label">BI tools</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100k+</div>
+          <div class="stat-label">Records analyzed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Will to learn</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-box fade-in">
+      <h3>Let's talk?</h3>
+      <p>I'm open to internship and junior data analyst opportunities.</p>
+      <div class="contact-btns">
+        <a href="/cdn-cgi/l/email-protection#1d7e7c74727f7f7174707c5d7a707c7471337e7270" class="btn btn-primary">Send an email</a>
+        <a href="https://www.linkedin.com/in/caio-bernardo-de-lima-6a4010240/?skipRedirect=true" class="btn btn-outline" target="_blank">LinkedIn</a>
+        <a href="https://github.com/CaioBreder" class="btn btn-outline" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <p>© 2025 Caio Breder Bernardo-de-Lima</p>
+    <p>Data Analytics Portfolio</p>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.targ
